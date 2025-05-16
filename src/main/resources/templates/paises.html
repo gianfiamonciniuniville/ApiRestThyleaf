@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Países</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<h1>Lista de Países</h1>
+
+<form method="get" action="/paises">
+    <label>Continente:
+        <input type="text" name="continente" th:value="${continente}">
+    </label>
+    <label>Ordenar por:
+        <select name="sortBy">
+            <option value="nome" th:selected="${sortBy == 'nome'}">Nome</option>
+            <option value="capital" th:selected="${sortBy == 'capital'}">Capital</option>
+            <option value="continente" th:selected="${sortBy == 'continente'}">continente</option>
+        </select>
+    </label>
+    <button type="submit">Filtrar</button>
+</form>
+
+<table>
+    <tr>
+        <th>Bandeira</th>
+        <th>Nome</th>
+        <th>Capital</th>
+        <th>Continente</th>
+    </tr>
+    <tr th:each="country : ${paises}">
+        <td><img th:src="${country.getBandeiraUrlImagem()}" alt="Flag" width="50"></td>
+        <td th:text="${country.getNome()}"></td>
+        <td th:text="${country.getCapital()}"></td>
+        <td th:text="${country.getContinente()}"></td>
+    </tr>
+</table>
+</body>
+</html>
