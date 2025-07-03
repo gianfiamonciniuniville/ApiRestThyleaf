@@ -5,6 +5,7 @@ import com.example.ApiRestThyleaf.Repository.PaisRepository;
 import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PaisService {
@@ -36,4 +37,15 @@ public class PaisService {
         };
     }
 
+    public Pais save(Pais pais) {
+        return repository.save(pais);
+    }
+
+    public Optional<Pais> findById(Long id) {
+        return repository.findById(id);
+    }
+
+    public void deleteById(Long id) {
+        repository.deleteById(id);
+    }
 }

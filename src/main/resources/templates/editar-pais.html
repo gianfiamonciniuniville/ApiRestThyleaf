@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar País</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+    <h1>Editar País</h1>
+
+    <form th:action="@{/paises/editar/{id}(id=${pais.id})}" th:object="${pais}" method="post">
+        <label>Nome:
+            <input type="text" th:field="*{nome}">
+        </label>
+        <label>Capital:
+            <input type="text" th:field="*{capital}">
+        </label>
+        <label>Continente:
+            <input type="text" th:field="*{continente}">
+        </label>
+        <label>URL da Bandeira:
+            <input type="text" th:field="*{bandeiraUrlImagem}">
+        </label>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

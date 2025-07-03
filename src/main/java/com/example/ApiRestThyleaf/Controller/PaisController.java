@@ -25,6 +25,33 @@ public class PaisController {
         model.addAttribute("paises", ListaPaises);
         model.addAttribute("continente", continente);
         model.addAttribute("sortBy", sortBy);
+        model.addAttribute("pais", new Pais()); // Objeto para o formulário de adição
         return "paises";
+    }
+
+    @PostMapping("/paises/adicionar")
+    public String addCountry(Pais pais) {
+        service.save(pais);
+        return "redirect:/paises";
+    }
+
+    @GetMapping("/paises/editar/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Pais pais = service.findById(id).orElseThrow(() -> new IllegalArgumentException("País inválido com Id:" + id));
+        model.addAttribute("pais", pais);
+        return "editar-pais";
+    }
+
+    @PostMapping("/paises/editar/{id}")
+    public String updateCountry(@PathVariable Long id, Pais pais) {
+        pais.setId(id);
+        service.save(pais);
+        return "redirect:/paises";
+    }
+
+    @GetMapping("/paises/excluir/{id}")
+    public String deleteCountry(@PathVariable Long id) {
+        service.deleteById(id);
+        return "redirect:/paises";
     }
 }
